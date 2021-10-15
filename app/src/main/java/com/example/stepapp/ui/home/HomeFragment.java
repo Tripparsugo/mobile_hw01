@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment {
     public TextView stepsGoalTextView;
 
     public ProgressBar stepsCountProgressBar;
-    private int stepsGoal = 1000;
+    private final int stepsGoal = 100;
     private SensorEventListener listener;
     private Sensor accSensor;
     private Sensor stepSensor;
@@ -50,14 +50,15 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         // TODO 9: Initialize the TextView variable
-
-        stepsGoalTextView.setText(String.valueOf(stepsGoal));
+        stepsGoalTextView = (TextView) root.findViewById(R.id.stepsGoal);
         stepsCountTextView = (TextView) root.findViewById(R.id.stepsCount);
+
         sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         accSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
         stepsCountProgressBar = root.findViewById(R.id.progressBar);
 
+        stepsGoalTextView.setText(String.valueOf(stepsGoal));
 
         // TODO 2: Get an instance of the sensor manager.
 
@@ -66,7 +67,7 @@ public class HomeFragment extends Fragment {
 
         // TODO 11
         // instantiate the StepCounterListener
-        listener = new StepCounterListener(stepsCountTextView, stepsCountProgressBar);
+        listener = new StepCounterListener();
 
         // Toggle group button
         materialButtonToggleGroup = (MaterialButtonToggleGroup) root.findViewById(R.id.toggleButtonGroup);
@@ -111,35 +112,24 @@ public class HomeFragment extends Fragment {
     }
 
 
-
-
     // Sensor event listener
     class StepCounterListener implements SensorEventListener {
 
         private long lastUpdate = 0;
 
         // ACC Step counter
-        public static int mACCStepCounter = 0;
-        public static int stepSensorStepCounter = 0;
+        public int mACCStepCounter = 0;
+        public int stepSensorStepCounter = 0;
         ArrayList<Integer> mACCSeries = new ArrayList<Integer>();
         private double accMag = 0;
         private int lastXPoint = 1;
         int stepThreshold = 6;
-        private final TextView textView;
-        private final ProgressBar stepCountProgressBar;
+
 
         // Android step detector
         int mAndroidStepCount = 0;
 
-        // TextView
-        TextView stepsCountTextView;
-
         //TODO 10
-
-        StepCounterListener(final TextView textView, final ProgressBar progressBar) {
-            this.stepCountProgressBar = progressBar;
-            this.textView = textView;
-        }
 
 
         @Override
@@ -261,9 +251,9 @@ public class HomeFragment extends Fragment {
         // Calculate the number of steps from the step detector
         private void countSteps() {
             stepSensorStepCounter++;
-            textView.setText(String.valueOf(stepSensorStepCounter));
+            stepsCountTextView.setText(String.valueOf(stepSensorStepCounter));
             Log.d("STEP: ", String.valueOf(stepSensorStepCounter));
-            stepCountProgressBar.setProgress((int) (stepSensorStepCounter/stepGoal));
+            stepsCountProgressBar.setProgress((int) (stepSensorStepCounter*100 / stepsGoal));
         }
     }
 }

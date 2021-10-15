@@ -6,6 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleButtonGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        app:singleSelection="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.914"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/toggleStart"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:drawableStart="@drawable/ic_play_solid"
+            android:layout_height="wrap_content"
+            android:text="@string/toggle_start"
+            app:icon="@drawable/ic_play_solid"
+
+        />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/toggleStop"
+            style="?attr/materialButtonOutlinedStyle"
+            android:drawableStart="@drawable/ic_pause_solid"
+            app:icon="@drawable/ic_pause_solid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/toggle_stop" />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -65,35 +99,6 @@
         android:progressDrawable="@drawable/circle"
         android:progress="0"
         />
-
-
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/toggleButtonGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        app:singleSelection="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.914"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/toggleStart"
-            style="?attr/materialButtonOutlinedStyle"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/toggle_start"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/toggleStop"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/toggle_stop" />
-
-    </com.google.android.material.button.MaterialButtonToggleGroup>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
